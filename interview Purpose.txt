@@ -1,0 +1,47 @@
+######interview Purpose#####
+
+myself k.shivakumar & I completed my graduation in 2017,
+I started my carrier at rio soft techno pvt ltd in the year of 2018 as a linux admin L0 for 1.1 years
+
+
+My roles and responsebilites are linux admin
+where I can monitor the servers, creating users and files and assigning the permissions to that,
+and installing necessary packages for the application & configuring servers by yum and rpm.
+and creating patitions when the volumes are nedded
+and then I moved into AWS & DevOps.we are using cloud as a AWS. 
+
+Coming to AWS services we have used 
+
+1 .I worked on some services like VPC,EC2 (instances launching part),taking snapshots of volumes  and  attaching volumes to the instances
+    when the volume is reached to high.
+
+3. Creating target groups for loadbalancers and maintaining the ALBs
+
+4. Creating s3 buckets and using the static website hosting option we can make it into public/ we can host it.
+
+5. and also involved in other services with coordinating of our seniors like
+
+route53,auto scaling,
+
+Coming to DevOps part:-
+
+1  involved Dev and QA and staging
+2. Setting up cicd in jenkins for DEV and QA and pre-prod env
+3. Sending the artifacts to nexus ( Means Integrating the Nexus with Jenkins)
+4. Analysing the code using Sonarqube( where we can check the status of code written by developers)
+5. Monitoring the all these servers by grafana monitor tool
+6. Have Knowledge reverse proxy for private networks ( used for our application)
+7. writing the  playbooks in ansible help of docs and seniors  
+8. present i was dealing the docker and k8 
+
+ in docker part i used to write the docker files and creating images and pushing images to docker hub 
+
+ launching the containers from images and clustering those containers by docker swarm
+
+ ##Now i analyzing the services like logstash and kibana elastic search and consul services in microservices part
+
+k8 part 
+
+basic knowledge about that
+
+creating cluster and deploying images on k8 by manifest files 

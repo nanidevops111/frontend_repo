@@ -1,0 +1,60 @@
+#######################installing on elasticsearch##########
+---
+- name: Update and upgrade apt packages
+  apt:
+    upgrade: yes
+    update_cache: yes
+
+- name: installing utilities
+  apt:
+    name: apt-transport-https
+    state: present
+
+- name: adding gpg key
+  shell: wget -qO - {{ GPG-KEY-elasticsearch }} | sudo apt-key add -
+
+- name: adding source key
+  shell: echo {{ elk_repo }} | sudo tee -a {{ souece_list }} 
+
+- name: installing jdk
+  apt:
+    name: openjdk-8-jdk 
+    state: present
+
+- name: installing jre
+  apt:
+    name: openjdk-8-jre 
+    state: present
+
+- name: installing elasticsearch
+  apt:
+    name: elasticsearch
+    update_cache: yes
+    state: present
+
+- name: adding vm max
+  shell: "{{ vm_max }}"
+
+- name: adding fs max
+  shell: "{{ fs_max }}"
+
+- name: adding ulimit n
+  shell: "{{ ulimit_n }}"
+
+- name: adding ulimit u
+  shell: "{{ ulimit_u }}"
+
+- name: adding owner permission share
+  shell: "{{ chown_share }}"
+  
+- name: adding owner permission log
+  shell: "{{ chown_log }}"
+
+- name: adding owner permission lib
+  shell: "{{ chown_lib }}"
+
+- name: adding owner permission default
+  shell: "{{ chown_default }}"
+
+- name: adding owner permission etc
+  shell: "{{ chown_etc }}"

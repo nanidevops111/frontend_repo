@@ -1,0 +1,89 @@
+pipeline {
+    agent any
+    tools {
+        maven 'Maven 3.3.9'
+        jdk 'jdk8'
+    }
+    stages {
+        stage ('Initialize') {
+            steps {
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                '''
+            }
+        }
+		
+		stage('Checkout') {
+      steps {
+        script {
+            git credentialsId: 'jenkins-user-github', url: 'https://github.com/aakashsehgal/FMU.git'
+			
+			}
+			
+		}
+		
+		  }
+
+stage ('run any script like shell script or group of shell commands') {
+            steps {
+                sh '''
+				echo Install Prerequisite Packages
+sudo apt-get install curl apt-transport-https ca-certificates software-properties-common -y
+echo Add the Docker Repositories
+echo we add the GPG key, by entering the following command in the command line:
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+echo Next, we add the repository:
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" -y
+echo just update the repository information:
+sudo apt update -y
+echo Install Docker on Ubuntu 18.04
+sudo apt install docker-ce -y
+systemctl start docker
+systemctl enable docker
+				'''
+            }
+        }
+				
+stage ('Docker file') {
+            steps {
+                sh '''
+				cd /var/lib/jenkins/workspace/angular.kuberenetes
+cat >Dockerfile <<'EOF'
+FROM ubuntu
+RUN apt-get update
+RUN apt-get install git -y
+RUN apt-get install sudo -y
+COPY ./build/libs/angular.sh /opt/
+RUN chmod +x /opt/angular.sh
+RUN sh /opt/angular.sh
+WORKDIR /opt/vedikaUI-5
+ENTRYPOINT ["ng", "serve", "--host", "0.0.0.0"]
+				'''
+            }
+        }
+		
+stage ('Docker file') {
+            steps {
+                sh '''
+				sudo docker build -t angular .
+				'''
+            }
+        }
+		
+stage ('Docker file') {
+            steps {
+                sh '''
+				sudo docker run -it --name angular angular /bin/bash
+				'''
+            }
+        }
+
+            post {
+                success {
+                    junit 'target/surefire-reports/*/.xml' 
+                }
+            }
+        }
+    }
+}
